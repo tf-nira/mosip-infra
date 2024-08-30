@@ -1,9 +1,65 @@
 gitRepo:
-  uri: https://github.com/mosip/mosip-config
-  version: v1.2.0.1
+  uri: https://github.com/niragit/mosip-config
+  ##
+  version: niradev-1.2.0.1-N1 
   ## Folders within the base repo where properties may be found.
   searchFolders: ""
-  private: false
-  ## User name of user who has access to the private repo. Ignore for public repo
-  username: ""
-  token: ""
+  private: true
+  # User name of user who has access to the private repo. Ignore for public repo
+  username: "niratest"
+  token: "Z2hwX0xYTjNnb00zZUpleHhuandXN1VOVWMxU1NZWGJmMDNqWk5FWg=="
+
+
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+            - name: SPRING_CLOUD_CONFIG_SERVER_OVERRIDES_SMS_API_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: sms_api_password
+                  name: sms-password
+            - name: SPRING_CLOUD_CONFIG_SERVER_OVERRIDES_SMS_EMAIL
+              valueFrom:
+                configMapKeyRef:
+                  key: sms_email
+                  name: sms-config
+            - name: SPRING_CLOUD_CONFIG_SERVER_OVERRIDES_SMS_USERID
+              valueFrom:
+                configMapKeyRef:
+                  key: sms_userid
+                  name: sms-config
+
+resources:
+  limits:
+    cpu: '2'
+    memory: 5Gi
+  requests:
+    cpu: '1'
+    memory: 1Gi
+
+startupProbe:
+  enabled: true
+  initialDelaySeconds: 60
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 30
+  successThreshold: 1
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 60
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 30
+  successThreshold: 1
+
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 60
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 30
+  successThreshold: 1
+

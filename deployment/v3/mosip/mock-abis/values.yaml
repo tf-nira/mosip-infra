@@ -1,0 +1,31 @@
+resources:
+  limits:
+    cpu: '2'
+    memory: 5Gi
+  requests: 
+    cpu: '1'
+    memory: 2Gi
+
+startupProbe:
+  enabled: true
+  initialDelaySeconds: 200
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 30
+  successThreshold: 1
+ 
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 100
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 30
+  successThreshold: 1
+  
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 200
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 30
+  successThreshold: 1

@@ -1,11 +1,11 @@
 onboarding:
   modules:
     - name: ida
-      enabled: true
+      enabled: false
     - name: print
       enabled: true
     - name: abis
-      enabled: true
+      enabled: false
     - name: resident
       enabled: true
     - name: mobileid
@@ -19,4 +19,4 @@ onboarding:
     - name: resident-oidc
       enabled: false
     - name: mimoto-keybinding
-      enabled: true
+      enabled: false
