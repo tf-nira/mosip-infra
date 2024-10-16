@@ -36,6 +36,9 @@ function installing_idrepo() {
   echo Running vid service
   helm -n $NS install vid mosip/vid --version $CHART_VERSION
 
+  echo Running credential-minio-cleanup service
+  helm -n $NS install cleanup mosip-helm-nira/credential-minio-cleanup --version $CHART_VERSION
+
   kubectl -n $NS  get deploy -o name |  xargs -n1 -t  kubectl -n $NS rollout status
   echo Installed idrepo services
   return 0
