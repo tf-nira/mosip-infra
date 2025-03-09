@@ -37,7 +37,7 @@ function installing_regproc() {
   helm -n $NS install regproc-pktserver tf-nira/regproc-pktserver  --set-string nodeSelector.vlan="200" --version $CHART_VERSION
 
   echo Installing group1
-  helm -n $NS install regproc-group1 tf-nira/regproc-group1 --set persistence.enabled=false  --set-string nodeSelector.vlan="200" --version $CHART_VERSION
+  helm -n $NS install regproc-group1 tf-nira/regproc-group1 --set persistence.enabled=true --set-string persistence.storageClass="nfs-csi"  --set-string nodeSelector.vlan="200" --version $CHART_VERSION
 
   echo Installing group2
   helm -n $NS install regproc-group2 tf-nira/regproc-group2   --set-string nodeSelector.vlan="200" --version $CHART_VERSION

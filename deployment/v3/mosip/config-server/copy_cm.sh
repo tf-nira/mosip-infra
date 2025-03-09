@@ -10,6 +10,9 @@ function copying_cm() {
   $COPY_UTIL configmap activemq-activemq-artemis-share activemq $DST_NS
   $COPY_UTIL configmap s3 s3 $DST_NS
   $COPY_UTIL configmap msg-gateway msg-gateways $DST_NS
+  $COPY_UTIL configmap db-config postgres $DST_NS
+  $COPY_UTIL configmap biosdk-config biosdk $DST_NS
+  $COPY_UTIL configmap redis-config redis $DST_NS
   return 0
 }
 
