@@ -8,8 +8,8 @@ fi
 
 function initialize_db() {
   NS=postgres
-  CHART_VERSION=12.0.1-pre-production
-  helm repo add tf-nira https://tf-nira.github.io/mosip-helm-nira
+  CHART_VERSION=12.0.1-prod
+  helm repo add nira https://niragit.github.io/mosip-helm
   helm repo update
 
   while true; do
