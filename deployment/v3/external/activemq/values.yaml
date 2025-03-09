@@ -5,3 +5,12 @@ istio:
   ingressController:
     name: ingressgateway-internal
   prefix: /
+
+hpa:
+  enabled: false
+  maxReplicas: 3
+  # average total CPU usage per pod (1-100)
+  cpu: 80
+  # average memory usage per pod (100Mi-1Gi)
+  memory: "1000Mi"
+  # requests: "500m"

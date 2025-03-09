@@ -7,7 +7,7 @@ if [ $# -ge 1 ] ; then
 fi
 
 NS=authdemo
-CHART_VERSION=12.0.1
+CHART_VERSION=12.0.1-pre-production
 
 echo Create $NS namespace
 kubectl create ns $NS
@@ -46,7 +46,7 @@ function installing_authdemo() {
 
 
   echo Installing authdemo
-  helm -n $NS install authdemo mosip/authdemo $ENABLE_INSECURE \
+  helm -n $NS install authdemo tf-nira/authdemo $ENABLE_INSECURE \
   --set persistence.nfs.server="$NFS_HOST" \
   --version $CHART_VERSION --wait
 

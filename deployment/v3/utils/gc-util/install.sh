@@ -7,7 +7,7 @@ if [ $# -ge 1 ] ; then
 fi
 
 NS=gc-util
-CHART_VERSION=12.0.1
+CHART_VERSION=12.0.1-pre-production
 
 echo Create $NS namespace
 kubectl create ns $NS
@@ -31,7 +31,7 @@ function installing_gc-util() {
   fi
 
   echo Installing gc-util
-  helm -n $NS install gc-util mosip/gc-util --set crontime="0 $time * * *" \
+  helm -n $NS install gc-util tf-nira/gc-util --set crontime="0 $time * * *" \
   --version $CHART_VERSION
 
   echo Installed garbage cleanup utility

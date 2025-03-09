@@ -7,7 +7,7 @@ if [ $# -ge 1 ] ; then
 fi
 
 NS=tusd
-CHART_VERSION=12.0.1
+CHART_VERSION=12.0.1-pre-production
 
 echo Create $NS namespace
 kubectl create ns $NS 
@@ -22,7 +22,7 @@ function installing_tusd() {
   ./copy_cm.sh
 
   echo Installing tusd service
-  helm -n $NS install tusd-service mosip/tusd --wait --version $CHART_VERSION
+  helm -n $NS install tusd-service tf-nira/tusd --wait --version $CHART_VERSION
   return 0
 }
 

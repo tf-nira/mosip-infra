@@ -7,7 +7,7 @@ if [ $# -ge 1 ] ; then
 fi
 
 NS=artifactory
-CHART_VERSION=12.0.1
+CHART_VERSION=12.0.1-pre-production
 
 echo Create $NS namespace
 kubectl create ns $NS 
@@ -18,7 +18,7 @@ function installing_artifactory() {
   helm repo update
 
   echo Installing artifactory
-  helm -n $NS install artifactory mosip/artifactory --set image.pullPolicy="IfNotPresent" --set-string nodeSelector.vlan="200" --version $CHART_VERSION
+  helm -n $NS install artifactory tf-nira/artifactory  --set-string nodeSelector.vlan="200" --version $CHART_VERSION
 
   kubectl -n $NS  get deploy -o name |  xargs -n1 -t  kubectl -n $NS rollout status
 

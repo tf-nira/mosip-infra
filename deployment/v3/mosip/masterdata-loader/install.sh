@@ -12,7 +12,7 @@ read -p "CAUTION: Do you still want to continue(Y/n)" yn
 if [ $yn = "Y" ]
   then
    NS=masterdata-loader
-   CHART_VERSION=12.0.1-1
+   CHART_VERSION=12.0.1-pre-production
    helm delete masterdata-loader -n $NS
    echo Create $NS namespace
    kubectl create ns $NS
@@ -46,7 +46,7 @@ if [ $yn = "Y" ]
 
    echo Loading masterdata
    helm -n $NS install masterdata-loader  tf-nira/masterdata-loader \
-   --set mosipDataGithubRepoUrl="https://github.com/mosip/mosip-data" \
+   --set mosipDataGithubRepoUrl="https://github.com/tf-nira/mosip-data" \
    --set mosipDataGithubBranch="v1.2.0.1" \
    --set db.host="$DB_HOST" \
    --set db.port="$DB_PORT" \

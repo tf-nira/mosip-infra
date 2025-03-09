@@ -7,7 +7,7 @@ if [ $# -ge 1 ] ; then
 fi
 
 NS=image-compressor
-CHART_VERSION=12.0.1-B3
+CHART_VERSION=12.0.1-pre-production
 
 echo Create $NS namespace
 kubectl create ns $NS
@@ -22,7 +22,7 @@ function installing_imagecompressor() {
   ./copy_cm.sh
 
   echo Installing imagecompressor server
-  helm -n $NS install image-compressor mosip/biosdk-service \
+  helm -n $NS install image-compressor tf-nira/biosdk-service \
   --set extraEnvVars[0].name="server_servlet_context_env" \
   --set extraEnvVars[0].value="/image-compressor" \
   --set extraEnvVars[1].name="spring_application_name_env" \

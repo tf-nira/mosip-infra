@@ -7,7 +7,7 @@ if [ $# -ge 1 ] ; then
 fi
 
 NS=landing-page
-CHART_VERSION=12.0.1
+CHART_VERSION=12.0.1-pre-production
 
 echo Create $NS namespace
 kubectl create ns $NS
@@ -44,7 +44,7 @@ function landing_page() {
   HEALTHSERVICES=$(kubectl get cm global -o jsonpath={.data.mosip-healthservices-host})
 
   echo Installing landing page
-  helm -n $NS install landing-page mosip/landing-page --version $CHART_VERSION  \
+  helm -n $NS install landing-page tf-nira/landing-page --version $CHART_VERSION  \
   --set landing.version=$VERSION \
   --set landing.name=$NAME \
   --set landing.api=$API \

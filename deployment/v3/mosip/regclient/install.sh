@@ -7,7 +7,7 @@ if [ $# -ge 1 ] ; then
 fi
 
 NS=regclient
-CHART_VERSION=12.0.1
+CHART_VERSION=12.0.1-pre-production
 
 ## GENERATE KEYSTORE PASSWORD
 KEYSTORE_PWD=$( openssl rand -base64 10 )
@@ -40,13 +40,13 @@ function installing_regclient() {
   HEALTH_URL=https://$INTERNAL_HOST/v1/syncdata/actuator/health
 
   echo Install reg client downloader. This may take a few minutes ..
-  helm -n $NS install regclient mosip/regclient \
+  helm -n $NS install regclient tf-nira/regclient \
     --set regclient.upgradeServerUrl=https://$REGCLIENT_HOST \
     --set regclient.healthCheckUrl=$HEALTH_URL \
     --set regclient.hostName=$INTERNAL_HOST \
     --set istio.host=$REGCLIENT_HOST \
     --wait \
-    --set image.pullPolicy="IfNotPresent" --set-string nodeSelector.vlan="200" \
+    --set-string nodeSelector.vlan="200" \
     --version $CHART_VERSION
 
   echo Get your download url from here

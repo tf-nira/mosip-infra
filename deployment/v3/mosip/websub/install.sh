@@ -7,7 +7,7 @@ if [ $# -ge 1 ] ; then
 fi
 
 NS=websub
-CHART_VERSION=12.0.1
+CHART_VERSION=12.0.1-pre-production
 
 echo Create $NS namespace
 kubectl create ns $NS
@@ -22,8 +22,8 @@ function installing_websub() {
   ./copy_cm.sh
 
   echo Installing websub
-  helm -n $NS install websub-consolidator mosip/websub-consolidator --set image.pullPolicy="IfNotPresent" --set-string nodeSelector.vlan="200" --version $CHART_VERSION --wait
-  helm -n $NS install websub mosip/websub --set image.pullPolicy="IfNotPresent" --set-string nodeSelector.vlan="200" --set additionalResources.javaOpts="-Xms6000M -Xmx6000M" --version $CHART_VERSION
+  helm -n $NS install websub-consolidator tf-nira/websub-consolidator  --set-string nodeSelector.vlan="200" --version $CHART_VERSION --wait
+  helm -n $NS install websub tf-nira/websub  --set-string nodeSelector.vlan="200" --set additionalResources.javaOpts="-Xms6000M -Xmx6000M" --version $CHART_VERSION
 
   kubectl -n $NS  get deploy -o name |  xargs -n1 -t  kubectl -n $NS rollout status
   echo Installed websub services

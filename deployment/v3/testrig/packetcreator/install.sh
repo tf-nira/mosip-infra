@@ -7,7 +7,7 @@ if [ $# -ge 1 ] ; then
 fi
 
 NS=packetcreator
-CHART_VERSION=12.0.1
+CHART_VERSION=12.0.1-pre-production
 
 echo Create $NS namespace
 kubectl create ns $NS
@@ -65,7 +65,7 @@ function installing_packetcreator() {
   fi
 
   echo Installing packetcreator
-  helm -n $NS install packetcreator mosip/packetcreator \
+  helm -n $NS install packetcreator tf-nira/packetcreator \
   $( echo $list ) \
   --set persistence.nfs.server="$NFS_HOST" \
   --wait --version $CHART_VERSION $ENABLE_INSECURE

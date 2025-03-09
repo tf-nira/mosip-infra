@@ -8,7 +8,7 @@ fi
 
 
 NS=print
-CHART_VERSION=12.0.1
+CHART_VERSION=12.0.1-pre-production
 
 echo Create $NS namespace
 kubectl create ns $NS 
@@ -23,7 +23,7 @@ function installing_print() {
   ./copy_cm.sh
 
   echo Installing print service
-  helm -n $NS install print-service mosip/print-service --set image.pullPolicy="IfNotPresent" --set-string nodeSelector.vlan="200" --wait --version $CHART_VERSION
+  helm -n $NS install print-service tf-nira/print-service  --set-string nodeSelector.vlan="200" --wait --version $CHART_VERSION
   return 0
 }
 

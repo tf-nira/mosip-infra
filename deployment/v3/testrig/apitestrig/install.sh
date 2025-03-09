@@ -7,7 +7,7 @@ if [ $# -ge 1 ] ; then
 fi
 
 NS=apitestrig
-CHART_VERSION=12.0.1
+CHART_VERSION=12.0.1-pre-production
 
 echo Create $NS namespace
 kubectl create ns $NS
@@ -82,7 +82,7 @@ function installing_apitestrig() {
    fi
 
   echo Installing apitestrig
-  helm -n $NS install apitestrig mosip/apitestrig \
+  helm -n $NS install apitestrig tf-nira/apitestrig \
   --set crontime="0 $time * * *" \
   -f values.yaml \
   --version $CHART_VERSION \

@@ -21,7 +21,7 @@ if [ "$flag" = "n" ]; then
 fi
 
 NS=onboarder
-CHART_VERSION=12.0.1-1
+CHART_VERSION=12.0.1-pre-production
 
 echo Create $NS namespace
 kubectl create ns $NS
@@ -68,7 +68,7 @@ function installing_onboarder() {
     s3_user_key=$( kubectl -n s3 get cm s3 -o json | jq -r '.data."s3-user-key"' )
 
     echo Onboarding default partners
-    helm -n $NS install partner-onboarder tf-nira/partner-onboarder --set image.pullPolicy="IfNotPresent" --set-string nodeSelector.vlan="200" \
+    helm -n $NS install partner-onboarder tf-nira/partner-onboarder  --set-string nodeSelector.vlan="200" \
     --set onboarding.configmaps.s3.s3-host="$s3_url" \
     --set onboarding.configmaps.s3.s3-user-key="$s3_user_key" \
     --set onboarding.configmaps.s3.s3-region="$s3_region" \
@@ -81,8 +81,8 @@ function installing_onboarder() {
 echo "Reports are moved to S3 under onboarder bucket"
 echo "Please follow the steps as mentioned in the document link below to configure mimoto-keybinding-partner:"
 BRANCH_NAME=$(git symbolic-ref --short HEAD)
-GITHUB_URL="https://github.com/mosip/mosip-infra/blob"
-FILE_PATH="/deployment/v3/mosip/partner-onboarder/README.md"
+GITHUB_URL="https://github.com/tf-nira/mosip-infra/blob"
+FILE_PATH="/deployment/v3/tf-nira/partner-onboarder/README.md"
 FULL_URL="$GITHUB_URL/$BRANCH_NAME$FILE_PATH#configuration"
 
 echo -e  "\e[1m\e[4m\e[34m\e]8;\a$FULL_URL\e[0m\e[24m\e]8;;\a"

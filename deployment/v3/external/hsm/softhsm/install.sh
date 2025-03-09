@@ -8,7 +8,7 @@ if [ $# -ge 1 ] ; then
 fi
 
 NS=softhsm
-CHART_VERSION=12.0.1
+CHART_VERSION=12.0.1-pre-production
 
 echo Create $NS namespaces
 kubectl create ns $NS
@@ -19,11 +19,11 @@ function installing_softhsm() {
   helm repo update
 
   echo Installing Softhsm for Kernel
-  helm -n $NS install softhsm-kernel mosip/softhsm -f values.yaml --version $CHART_VERSION --wait
+  helm -n $NS install softhsm-kernel tf-nira/softhsm -f values.yaml --version $CHART_VERSION --wait
   echo Installed Softhsm for Kernel
 
   echo Installing Softhsm for IDA
-  helm -n $NS install softhsm-ida mosip/softhsm -f values.yaml --version $CHART_VERSION --wait
+  helm -n $NS install softhsm-ida tf-nira/softhsm -f values.yaml --version $CHART_VERSION --wait
   echo Installed Softhsm for IDA
   return 0
 }
