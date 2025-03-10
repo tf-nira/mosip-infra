@@ -27,7 +27,7 @@ ingress:
 
 proxyAddressForwarding: true
 
-replicaCount: 1
+replicaCount: 4
 
 # Enable if replicaCount > 1
 serviceDiscovery:
@@ -133,11 +133,11 @@ postgresql:
   enabled: false
 
 externalDatabase:
-  host: "<host/IP>"
-  port: 5432
+  host: "172.16.104.17"
+  port: 6432
   user: bn_keycloak
   database: bitnami_keycloak
-  password: "<password>"
+  password: "Prd_M0s!p#_123$"
 
 autoscaling:
   enabled: false

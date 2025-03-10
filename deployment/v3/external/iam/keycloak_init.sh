@@ -38,9 +38,9 @@ read_user_input(){
 
 function initialize_keycloak() {
   NS=keycloak
-  CHART_VERSION=12.0.1-pre-production
+  CHART_VERSION=12.0.1-prod
 
-  helm repo add tf-nira https://tf-nira.github.io/mosip-helm-nira
+  helm repo add nira https://niragit.github.io/mosip-helm
   helm repo update
 
   read_user_input SMTP_HOST "'SMTP host' for keycloak"
