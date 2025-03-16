@@ -12,6 +12,7 @@ function initialize_db() {
   helm repo add nira https://niragit.github.io/mosip-helm
   helm repo update
 
+  kubectl create ns $NS || true
   while true; do
       read -p "CAUTION: all existing data will be lost. Are you sure?(Y/n)" yn
       if [ $yn = "Y" ]
