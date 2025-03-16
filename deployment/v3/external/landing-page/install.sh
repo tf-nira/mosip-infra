@@ -57,14 +57,9 @@ function landing_page() {
   --set landing.minio=$MINIO \
   --set landing.keycloak=$KEYCLOAK  \
   --set landing.regclient=$REGCLIENT  \
-  --set landing.postgres.host=$POSTGRES \
-  --set landing.postgres.port=$POSTGRES_PORT \
   --set landing.pmp=$PMP \
-  --set landing.compliance=$COMPLIANCE \
   --set landing.resident=$RESIDENT \
-  --set landing.esignet=$ESIGNET \
   --set landing.smtp=$SMTP \
-  --set landing.healthservices=$HEALTHSERVICES \
   --set istio.host=$DOMAIN
 
   kubectl -n $NS  get deploy -o name |  xargs -n1 -t  kubectl -n $NS rollout status

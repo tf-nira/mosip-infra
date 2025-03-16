@@ -42,16 +42,18 @@ function msg_gateway() {
     yn=Y;
   fi
   if [ $yn != "Y" ]; then
-      read -p "Please enter the SMS host " SMS_HOST
-      read -p "Please enter the SMS host port " SMS_PORT
-      read -p "Please enter the SMS user " SMS_USER
-      read -p "Please enter the SMS secret key " SMS_SECRET
-      read -p "Please enter the SMS auth key " SMS_AUTHKEY
+      read -p "Please enter the SMS host url    " SMS_HOST_URL
+      read -p "Please enter the SMS user id     " SMS_USER_ID
+      read -p "Please enter the SMS secret key  " SMS_SECRET
+      read -p "Please enter the SMS auth key    " SMS_AUTHKEY
+      read -p "Please enter the SMS EMAIL ID    " SMS_EMAIL_ID
   fi
+
   kubectl -n $NS delete --ignore-not-found=true configmap msg-gateway
-  kubectl -n $NS create configmap msg-gateway --from-literal="smtp-host=$SMTP_HOST" --from-literal="sms-host=$SMS_HOST" --from-literal="smtp-port=$SMTP_PORT" --from-literal="sms-port=$SMS_PORT" --from-literal="smtp-username=$SMTP_USER" --from-literal="sms-username=$SMS_USER"
+  kubectl -n $NS create configmap msg-gateway  --from-literal="sms-host-url=$SMS_HOST_URL" --from-literal="smtp-host=$SMTP_HOST" --from-literal="smtp-port=$SMTP_PORT" --from-literal="smtp-username=$SMTP_USER"
+
   kubectl -n $NS delete --ignore-not-found=true secret msg-gateway
-  kubectl -n $NS create secret generic msg-gateway --from-literal="smtp-secret=$SMTP_SECRET" --from-literal="sms-secret=$SMS_SECRET" --from-literal="sms-authkey=$SMS_AUTHKEY" --dry-run=client  -o yaml | kubectl apply -f -
+  kubectl -n $NS create secret generic msg-gateway  --from-literal="sms-email-id=$SMS_EMAIL_ID" --from-literal="sms-user-id=$SMS_USER_ID"  --from-literal="sms-secret=$SMS_SECRET" --from-literal="sms-authkey=$SMS_AUTHKEY" --from-literal="smtp-secret=$SMTP_SECRET" --dry-run=client  -o yaml | kubectl apply -f -
 
   echo smtp and sms related configurations set.
   return 0
