@@ -46,19 +46,6 @@ startupProbe:
   failureThreshold: 30
   successThreshold: 1
 
-externalAccess:
-  enabled: true
-  service:
-    type: NodePort
-    ports:
-      external: 9094
-    nodePorts:
-    - 30191
-    - 30192
-    - 30193
-    - 30194
-    - 30195
-  autoDiscovery: 
-    enabled: true
+
 rbac:
   create: true

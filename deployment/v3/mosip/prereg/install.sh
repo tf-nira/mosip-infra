@@ -29,8 +29,8 @@ function installing_prereg() {
   echo Install prereg-gateway
   helm -n $NS install prereg-gateway tf-nira/prereg-gateway --set istio.hosts[0]=$PREREG_HOST --version $CHART_VERSION
 
-  echo Installing prereg-captcha
-  helm -n $NS install prereg-captcha tf-nira/prereg-captcha  --set-string nodeSelector.vlan="100" --version $CHART_VERSION
+  #echo Installing prereg-captcha
+  #helm -n $NS install prereg-captcha tf-nira/prereg-captcha  --set-string nodeSelector.vlan="100" --version $CHART_VERSION
 
   echo Installing prereg-application
   helm -n $NS install prereg-application tf-nira/prereg-application  --set-string nodeSelector.vlan="200" --version $CHART_VERSION

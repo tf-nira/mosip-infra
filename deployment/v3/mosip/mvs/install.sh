@@ -13,8 +13,7 @@ CHART_VERSION=12.0.1-pre-production
 echo Create $NS namespace
 kubectl create ns $NS
 
-helm repo add mvs-service https://tf-nira.github.io/mosip-helm-nira/
-helm repo add mvs-ui https://tf-nira.github.io/mosip-helm-nira/
+helm repo add tf-nira https://tf-nira.github.io/mosip-helm-nira/
 
 function installing_mvs() {
   echo Istio label
@@ -30,7 +29,7 @@ function installing_mvs() {
   #./dockerlogin.sh
 
   API_HOST=$(kubectl get cm global -o jsonpath={.data.mosip-api-internal-host})
-  mvs_HOST=$NS.$(kubectl get cm global -o jsonpath={.data.installation-domain})
+  mvs_HOST=$NS.$(kubectl get cm global -o jsonpath={.data.mosip-mvs-host})
 
   echo Installing mvs-Proxy into Masterdata and Keymanager.
   kubectl -n $NS apply -f mvs-proxy.yaml
