@@ -133,11 +133,11 @@ postgresql:
   enabled: false
 
 externalDatabase:
-  host: "172.16.104.17"
-  port: 6432
+  host: ""
+  port: ""
   user: bn_keycloak
   database: bitnami_keycloak
-  password: "Prd_M0s!p#_123$"
+  password: ""
 
 autoscaling:
   enabled: false
